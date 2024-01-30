@@ -13,16 +13,16 @@ const LoginByEmail = () => {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
-    useEffect(()=>{
+    const loginByEmail = async()=>{
         console.log(loginToken)
         setLoading(true)
         if (loginToken==""||loginToken==null){
             setLoading(false)
             return
         }
-        console.log("past deny")
-        auth.authActions.loginByEmail({username:loginToken}).then(
-            setSuccess(true)
+        auth.authActions.loginByEmail({username:loginToken}).then(()=>{
+            setSuccess(true);
+        }
         ).catch((err)=>{
             console.log(err)
             setAnError(err.errorMessage)
@@ -30,6 +30,12 @@ const LoginByEmail = () => {
         ).finally(()=>{
                 setLoading(false)
         })
+    }
+    useEffect(()=>{
+        const iframe = document.getElementById('auth-embed');
+        iframe.onload = () => {
+            loginByEmail()
+        };
     },[])
 
   return (
@@ -44,7 +50,6 @@ const LoginByEmail = () => {
     </>
     :
     <>
-    <div className='errorText'>Invalid Login Link</div>
     <div className='errorText'>{anError}</div>
     <div>Check for a more recent email, or send a new email.</div>
     <div>Dont Forget To Check Your Spam Folder!!</div>

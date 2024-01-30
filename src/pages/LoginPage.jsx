@@ -30,6 +30,8 @@ const LoginPage = ({ setShowPassword, showPassword}) => {
             setLoading(false)
         })
     }
+
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const submitForm=(e)=>{
         e.preventDefault()

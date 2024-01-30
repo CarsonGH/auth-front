@@ -53,6 +53,9 @@ export function useCreateAuth(src) {
       login: (credentials) => {
           return(sendActionToIframe('login', credentials))
       },
+      loginByEmail: (data) => {
+          return(sendActionToIframe('loginbyemail', data))
+      },
       registerUser: (userData) => {
         console.log("registerserAuthAction")
           sendActionToIframe('register', userData);
@@ -260,7 +263,7 @@ export function useCreateAuth(src) {
           })
         })
       },
-      loginByEmail : (data)=>{
+      loginByEmail1 : (data)=>{
         return new Promise((resolve,reject)=>{
           const jsonData={
             "username":data.resetToken
