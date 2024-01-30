@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRef, useState, useContext } from 'react'
-import { AuthContext } from '../main'
 import Spinner from '../components/spinner'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import { AuthContext } from '../main'
 const ResetPassword = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const resetToken = searchParams.get("token")

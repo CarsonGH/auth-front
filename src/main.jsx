@@ -12,5 +12,5 @@ export {AuthContext};
 ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
     <App />
-    </AuthProvider>,
+    </AuthProvider>
 )

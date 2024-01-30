@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../main'
 import { useState } from 'react'
+import Spinner from '../components/spinner'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,8 +23,6 @@ const RegisterPage = ({setShowPassword, showPassword}) => {
     }
     errorTimeout.current=setTimeout(()=>{setAnError("")},5000)
   }
-
-
 
   const createNewUser=(e)=>{
   e.preventDefault()

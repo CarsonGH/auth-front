@@ -6,6 +6,8 @@ export function useCreateAuth(src) {
     const [auth, setAuth] = useState(
       JSON.parse(localStorage.getItem("user_data"))
     );
+
+    
     const sendMessageToIframe = (message) => {
       const iframe = document.getElementById('auth-embed');
       iframe.contentWindow.postMessage(message, "*");
@@ -48,26 +50,22 @@ export function useCreateAuth(src) {
 
   const authActions = {
 
+      login: (credentials) => {
+          return(sendActionToIframe('login', credentials))
+      },
       registerUser: (userData) => {
         console.log("registerserAuthAction")
           sendActionToIframe('register', userData);
       },
-
-      login: (credentials) => {
-          return(sendActionToIframe('login', credentials))
-      },
-
       logout: () => {
           const rtn =sendMessageToIframe({ action: 'logout' });
           localStorage.removeItem("user_data");
           setAuth(null);
           return rtn;
       },
-
       refreshToken: () => {
           return(sendActionToIframe('refresh', {}));
       },
-
       forgotPassword: (email) => {
         return new Promise((resolve, reject) => {
           const jsonData = {
@@ -99,13 +97,6 @@ export function useCreateAuth(src) {
           });
         });
       },
-      /**
-       * Sends the user a one time login email.
-       * 
-       * @param {string} email - The current email of the user.
-       * @returns {string | null} - Returns an error message if the password change fails, otherwise returns null.
-       */
-
       sendLoginByEmail: (email) => {
         return new Promise((resolve, reject) => {
           const jsonData = {
@@ -138,16 +129,6 @@ export function useCreateAuth(src) {
           });
         });
       },
-        /**
-       * Changes the user's password.
-       * 
-       * @param {string} oldPassword - The current password of the user.
-       * @param {string} newPassword - The new password to set.
-       * @param {Object} data - An object containing the old and new passwords.
-       * @param {string} data.oldPassword - The current password (same as oldPassword parameter).
-       * @param {string} data.newPassword - The new password (same as newPassword parameter).
-       * @returns {string | null} - Returns an error message if the password change fails, otherwise returns null.
-       */
       changePassword: (data) => {
         return new Promise((resolve, reject) => {
           if (data.newPassword.length < 8) {
@@ -170,7 +151,6 @@ export function useCreateAuth(src) {
               "auth_token": auth.auth_token
             }),
           };
-      
           fetch(src + "/change-password", send)
             .then(resp => {
               if (!resp.ok) {
@@ -188,12 +168,7 @@ export function useCreateAuth(src) {
             });
         });
       },
-      /**
-       * Deletes the user's account.
-       * 
-       * @param {string} password - The current password of the user.
-       * @returns {string | null} - Returns an error message if the password change fails, otherwise returns null.
-       */
+
       deleteAccount: (data) => {
         return new Promise((resolve, reject) => {
           const del = window.confirm("Are you sure you want to delete account? \nTHIS ACTION IS PERMANENT!!");
@@ -229,13 +204,6 @@ export function useCreateAuth(src) {
           });
         });
       },
-      
-       /**
-       * Send the user a verification email.
-       * 
-       * @param {string} email - The current email of the user.
-       * @returns {string | null} - Returns an error message if the password change fails, otherwise returns null.
-       */
        verifyEmail : () => {
         return new Promise(async (resolve, reject) => {
           const jsonData = {
@@ -374,13 +342,8 @@ export function useCreateAuth(src) {
           reject(String(err))
         })
       })
-    }
-  
+    } 
   }
-
-
-
-
     return (
       <AuthContext.Provider value={{ auth, authActions, setAuth }}>
         <iframe id="auth-embed" src={src+"/embed"} style={{ display: 'none' }} />
