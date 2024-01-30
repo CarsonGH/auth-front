@@ -1,0 +1,94 @@
+*{
+  box-sizing: border-box;
+}
+
+:root {
+  box-sizing: border-box;
+  font-family: Montserrat,Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.87);
+  background-color: whitesmoke;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,h2,h3,h4,h5{
+  padding: 0px;
+  margin:0px;
+}
+nav{
+  box-sizing: border-box;
+}
+:root,body,#root,main{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  width:100%;
+  max-width: 100vw;
+}
+button{
+  cursor:pointer;
+  display: inline-block;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-align: left;
+  color: inherit;
+  outline: none;
+  line-height: normal;
+}
+button:focus-visible{
+  outline: 2px solid rgb(59, 59, 255);
+}
+
+main{
+  box-sizing: border-box;
+}
+
+
+
+body {
+  margin: 0;
+  padding:0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.button {
+  color:white;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.button:hover {
+  border-color: #646cff;
+}
+
+.button:focus,
+.button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+a{
+  text-decoration: unset;
+  color:unset;
+}
